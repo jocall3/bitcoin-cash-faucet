@@ -1,4 +1,4 @@
-pragma cashscript >= 0.7.0;
+export const faucetContract = `pragma cashscript >= 0.7.0;
 
 // v20220609
 
@@ -36,4 +36,4 @@ contract Faucet(
         require(tx.outputs[0].value >= returnedValue);
     }
 
-}
+}`
