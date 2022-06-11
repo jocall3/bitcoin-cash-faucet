@@ -8,81 +8,80 @@ Relative timelocks are used to prevent paying out more times than once per given
 
 It is a contract anyone can spend to send a set amount of coins to an address for free, without work.
 
-## Setup
-
-To install the required libraries
-
-
-    git clone https://github.com/2qx/bitcoin-cash-faucet.git
-    yarn 
-
-
- note: was package initially tested with yarn and nodejs v14
 
 ## Usage
 
 To see the faucet balance:
 
-    yarn balance
+    npx bitcoin-cash-faucet
 
 which returns:
 
-    $ ts-node index.ts balance
-    contract address: bchtest:pq75zmtt8d84nqnxv8vx3wj06mmzlhjnwu2n8uh89l
-    contract balance: 6002
-    Done in 3.13s.
+    # contract nonce     # 1
+    contract address:      bchtest:pq75zmtt8d84nqnxv8vx3wj06mmzlhjnwu2n8uh89l
+    contract balance:      4002
 
-The above indicates a contract balance of 6002 sats. Each payout is 1000 sats, the transaction size is about 148 bytes.
+The above indicates a contract balance of 3002 sats. 
 
 ### Getting a payout of testnet coins
 
 To use the faucet, configure your receiving address as ADDRESS in your environment or pass it before the `drip` script: 
 
-    ADDRESS="<insert your bchtest: address>" yarn drip 
+    npx bitcoin-cash-faucet --address bchtest:qzz0tq2rg2xjgswchsvdrqzudsle8vje9g0zyhnap8
+
 
 which returns: 
 
-    $ ts-node index.ts drip
-    returned:  4002
-    payout:  848
+    # contract nonce     # 1
+    contract address:      bchtest:pq75zmtt8d84nqnxv8vx3wj06mmzlhjnwu2n8uh89l
+    contract balance:      4002
+    payout:              - 848
+    fee paid:            - 152
+    ===================================
+    new contract balance:  3002
 
-Indicating 848 was paid, 152 was given as a fee, and 4002 was returned to the contract.
+Indicating 848 was paid, 152 was given as a fee, and 3002 was returned to the contract.
 
 ## Abusing
 
 Let's get more coins by hitting the faucet again:
 
-If we use the `drip` script more than once each block, it throws an error indicating the transaction was rejected by [BIP68 (timelock) rules](https://en.bitcoin.it/wiki/BIP_0068), 
+    npx bitcoin-cash-faucet --address bchtest:qzz0tq2rg2xjgswchsvdrqzudsle8vje9g0zyhnap8
 
-    returned:  4002
-    payout:  848
-    (node:502203) UnhandledPromiseRejectionWarning: Error: Transaction failed with reason: the transaction was rejected by network rules.
+It throws an error indicating the transaction was rejected by [BIP68 (timelock) rules](https://en.bitcoin.it/wiki/BIP_0068), 
+
+    # contract nonce     # 1
+    contract address:      bchtest:pq75zmtt8d84nqnxv8vx3wj06mmzlhjnwu2n8uh89l
+    contract balance:      2002
+    payout:              - 848
+    fee paid:            - 152
+    ===================================
+    new contract balance:  1002
+    Internal Error: Transaction failed with reason: the transaction was rejected by network rules.
 
     non-BIP68-final (code 64)
 
-    meep debug --tx=02000000010c17e0e168c965326290df724d517ebd252e7b4ccfd3d21221b517315f177d29000000001f1e5102e80351b2757c00a26900cd02a914c1a97e01877e88c0c67c9400cca10100000002a20f00000000000017a9143d416d6b3b4f59826661d868ba4fd6f62fde53778750030000000000001976a91484f58143428d2441d8bc18d1805c6c3f93b2592a88acdb830100 --idx=0 --amt=5002 --pkscript=a9143d416d6b3b4f59826661d868ba4fd6f62fde537787
+    meep debug --tx=0200000001adcfc4865e56e6d1c8fe3b1543bcc9e5f7adcd1e4ae8fb1bda9465ae14da8eb6000000001f1e5102e80351b2757c00a26900cd02a914c1a97e01877e88c0c67c9400cca10100000002ea0300000000000017a9143d416d6b3b4f59826661d868ba4fd6f62fde53778750030000000000001976a91484f58143428d2441d8bc18d1805c6c3f93b2592a88ac41840100 --idx=0 --amt=2002 --pkscript=a9143d416d6b3b4f59826661d868ba4fd6f62fde537787
+
+    non-BIP68-final (code 64)
 
 ## More faucets
 
 The contract includes a nonce, or parameter to make the contract unique.  If the first faucet is busy (already used that block), it should be possible to fire up another contract and fund it by changing this parameter:
 
-    NONCE=2 yarn balance
-    
-    $ ts-node index.ts balance
-    contract address: bchtest:pzvv2yhpsq2twj3kxgmsd76de4y785d3evmwavdl69
-    contract balance: 0
-    Done in 3.17s.
+    npx bitcoin-cash-faucet --nonce 2
+    # contract nonce     # 2
+    contract address:      bchtest:pzvv2yhpsq2twj3kxgmsd76de4y785d3evmwavdl69
+    contract balance:      0
 
-    NONCE=3 yarn balance
+    npx bitcoin-cash-faucet --nonce 3
+    # contract nonce     # 3
+    contract address:      bchtest:pzpzxvw8kluds32v3lpa9mq43l2rdpny656agju0lt
+    contract balance:      0
 
-    $ ts-node index.ts balance
-    contract address: bchtest:pzpzxvw8kluds32v3lpa9mq43l2rdpny656agju0lt
-    contract balance: 0
-
-    NONCE=1231232134 yarn balance
-
-    $ ts-node index.ts balance
-    contract address: bchtest:prgdau8978p7sg5prxy2ggsdcj859wzzayg7nf2e20
-    contract balance: 0
+    npx bitcoin-cash-faucet --nonce 1231232134
+    # contract nonce     # 1231232134
+    contract address:      bchtest:prgdau8978p7sg5prxy2ggsdcj859wzzayg7nf2e20
+    contract balance:      0
 
 Obviously each new contract would need funding, and it would be fairly trivial for one party to collect all tBCH from every contract with little work every block.

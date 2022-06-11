@@ -1,6 +1,6 @@
 
 
-import { Contract, ElectrumNetworkProvider, FailedTransactionError } from 'cashscript';
+import { Contract, ElectrumNetworkProvider } from 'cashscript';
 import { compileString } from "cashc";
 import path from 'path';
 
@@ -37,7 +37,7 @@ export async function drip(address:string, nonce:number): Promise<TransactionDet
 
   let contract = await getContract(nonce);
   let balance = await contract.getBalance();
-  let fn = contract.functions.drip;
+  let fn = contract.functions['drip'];
   
   let newPrincipal = balance - payout
 
@@ -64,7 +64,6 @@ export async function drip(address:string, nonce:number): Promise<TransactionDet
     .send();
     return payTx
   }catch(e){
-      if(e===FailedTransactionError) console.log("Faucet has already paid for this period.")
       throw(e)
   }
 
