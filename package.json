@@ -1,0 +1,22 @@
+{
+    "name": "bitcoin-cash-faucet",
+    "version": "1.0.0",
+    "description": "A bitcoin faucet utility",
+    "main": "index.js",
+    "repository": "https://github.com/2qx/bitcoin-cash-faucet.git",
+    "author": "-",
+    "license": "MIT",
+    "dependencies": {
+      "@bitauth/libauth": "^1.19.1",
+      "cashc": "^0.7.0",
+      "cashscript": "^0.7.0",
+      "mainnet-js": "^0.4.40",
+      "ts-node": "^10.8.0",
+      "typescript": "^4.7.2"
+    },
+    "scripts": {
+      "balance": "ts-node index.ts balance",
+      "drip": "ts-node index.ts drip"
+    }
+  }
+  
