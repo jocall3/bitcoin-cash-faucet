@@ -10,14 +10,14 @@ It is a contract anyone can spend to send a set amount of coins to an address fo
 
 ## Setup
 
-To intall the required libraries
+To install the required libraries
 
 
     git clone https://github.com/2qx/bitcoin-cash-faucet.git
     yarn 
 
 
- note: was package initally tested with yarn and nodejs v14
+ note: was package initially tested with yarn and nodejs v14
 
 ## Usage
 
@@ -34,9 +34,9 @@ which returns:
 
 The above indicates a contract balance of 6002 sats. Each payout is 1000 sats, the transaction size is about 148 bytes.
 
-### Getting a payout coins
+### Getting a payout of testnet coins
 
-To use the faucet, configure your recieving address as ADDRESS in your enviroment or pass it before the `drip` script: 
+To use the faucet, configure your receiving address as ADDRESS in your environment or pass it before the `drip` script: 
 
     ADDRESS="<insert your bchtest: address>" yarn drip 
 
@@ -48,11 +48,11 @@ which returns:
 
 Indicating 848 was paid, 152 was given as a fee, and 4002 was returned to the contract.
 
-## Abusage
+## Abusing
 
 Let's get more coins by hitting the faucet again:
 
-If we use the `drip` script more than once each block, it throws an error indicating the transaction was rejected by BIP68 (timelock) rules, 
+If we use the `drip` script more than once each block, it throws an error indicating the transaction was rejected by [BIP68 (timelock) rules](https://en.bitcoin.it/wiki/BIP_0068), 
 
     returned:  4002
     payout:  848
@@ -64,7 +64,7 @@ If we use the `drip` script more than once each block, it throws an error indica
 
 ## More faucets
 
-The contract includes a nonce, or paramater to make the contract unique.  If the first faucet is busy (already used that block), it should be possible to fire up another contract and fund it by changing this parameter:
+The contract includes a nonce, or parameter to make the contract unique.  If the first faucet is busy (already used that block), it should be possible to fire up another contract and fund it by changing this parameter:
 
     NONCE=2 yarn balance
     
