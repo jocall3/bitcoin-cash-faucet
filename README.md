@@ -13,6 +13,7 @@ It is a contract anyone can spend to send a set amount of coins to an address fo
 To intall the required libraries
 
 
+    git clone https://github.com/2qx/bitcoin-cash-faucet.git
     yarn 
 
 
