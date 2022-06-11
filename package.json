@@ -1,6 +1,6 @@
 {
   "name": "bitcoin-cash-faucet",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A bitcoin faucet utility",
   "type": "module",
   "bin": "npx.cjs",
@@ -21,5 +21,13 @@
   "scripts": {
     "balance": "ts-node index.ts balance",
     "drip": "ts-node index.ts drip"
-  }
+  },
+  "keywords": [
+      "bitcoin",
+      "bitcoin cash",
+      "bch",
+      "cashscript",
+      "testnet",
+      "faucet"
+  ]
 }
