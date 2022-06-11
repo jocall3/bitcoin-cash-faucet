@@ -11,6 +11,10 @@ It is a contract anyone can spend to send a set amount of coins to an address fo
 
 ## Usage
 
+Install the package in your prefereed node environment
+
+    npm i bitcoin-cash-faucet # -g
+    
 To see the faucet balance:
 
     npx bitcoin-cash-faucet
@@ -19,13 +23,13 @@ which returns:
 
     # contract nonce     # 1
     contract address:      bchtest:pq75zmtt8d84nqnxv8vx3wj06mmzlhjnwu2n8uh89l
-    contract balance:      4002
+    contract balance:      10797
 
-The above indicates a contract balance of 3002 sats. 
+The above indicates the contract number, deposit address and a balance of 10797 sats. 
 
 ### Getting a payout of testnet coins
 
-To use the faucet, configure your receiving address as ADDRESS in your environment or pass it before the `drip` script: 
+To use the faucet, drop your address with the `--address` flag:  
 
     npx bitcoin-cash-faucet --address bchtest:qzz0tq2rg2xjgswchsvdrqzudsle8vje9g0zyhnap8
 
