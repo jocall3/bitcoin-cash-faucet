@@ -15,14 +15,15 @@ let period = 1;
 let payout = 1000;
 
 
-export async function getContract(nonce:number): Promise<Contract> {
+export async function getContract(isTestnet:boolean, nonce:number): Promise<Contract> {
   
 
   // Compile the TransferWithTimeout contract
   let script = compileString(faucetContract)
 
   // Initialise a network provider for network operations on Testnet
-  const provider = new ElectrumNetworkProvider('staging');
+
+  const provider = isTestnet ? new ElectrumNetworkProvider('staging') : new ElectrumNetworkProvider('mainnet');
 
   let contract =  new Contract(script, [period, payout, nonce], provider);
 
@@ -33,9 +34,9 @@ export async function getContract(nonce:number): Promise<Contract> {
 
 }
 
-export async function drip(address:string, nonce:number): Promise<TransactionDetails> {
+export async function drip(isTestnet:boolean, address:string, nonce:number): Promise<TransactionDetails> {
 
-  let contract = await getContract(nonce);
+  let contract = await getContract(isTestnet, nonce);
   let balance = await contract.getBalance();
   let fn = contract.functions['drip'];
   

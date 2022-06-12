@@ -17,7 +17,7 @@ Install the package in your prefereed node environment
     
 To see the faucet balance:
 
-    npx bitcoin-cash-faucet
+    npx bitcoin-cash-faucet --testnet
 
 which returns:
 
@@ -31,7 +31,7 @@ The above indicates the contract number, deposit address and a balance of 10797 
 
 To use the faucet, drop your address with the `--address` flag:  
 
-    npx bitcoin-cash-faucet --address bchtest:qzz0tq2rg2xjgswchsvdrqzudsle8vje9g0zyhnap8
+    npx bitcoin-cash-faucet --testnet --address bchtest:qzz0tq2rg2xjgswchsvdrqzudsle8vje9g0zyhnap8
 
 
 which returns: 
@@ -50,7 +50,7 @@ Indicating 848 was paid, 152 was given as a fee, and 3002 was returned to the co
 
 Let's get more coins by hitting the faucet again:
 
-    npx bitcoin-cash-faucet --address bchtest:qzz0tq2rg2xjgswchsvdrqzudsle8vje9g0zyhnap8
+    npx bitcoin-cash-faucet --testnet --address bchtest:qzz0tq2rg2xjgswchsvdrqzudsle8vje9g0zyhnap8
 
 It throws an error indicating the transaction was rejected by [BIP68 (timelock) rules](https://en.bitcoin.it/wiki/BIP_0068), 
 
@@ -73,17 +73,17 @@ It throws an error indicating the transaction was rejected by [BIP68 (timelock) 
 
 The contract includes a nonce, or parameter to make the contract unique.  If the first faucet is busy (already used that block), it should be possible to fire up another contract and fund it by changing this parameter:
 
-    npx bitcoin-cash-faucet --nonce 2
+    npx bitcoin-cash-faucet --testnet --nonce 2
     # contract nonce     # 2
     contract address:      bchtest:pzvv2yhpsq2twj3kxgmsd76de4y785d3evmwavdl69
     contract balance:      0
 
-    npx bitcoin-cash-faucet --nonce 3
+    npx bitcoin-cash-faucet --testnet --nonce 3
     # contract nonce     # 3
     contract address:      bchtest:pzpzxvw8kluds32v3lpa9mq43l2rdpny656agju0lt
     contract balance:      0
 
-    npx bitcoin-cash-faucet --nonce 1231232134
+    npx bitcoin-cash-faucet --testnet --nonce 1231232134
     # contract nonce     # 1231232134
     contract address:      bchtest:prgdau8978p7sg5prxy2ggsdcj859wzzayg7nf2e20
     contract balance:      0

@@ -1,6 +1,6 @@
 {
   "name": "bitcoin-cash-faucet",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A bitcoin faucet utility",
   "type": "module",
   "bin": "npx.cjs",
@@ -26,6 +26,7 @@
       "bitcoin",
       "bitcoin cash",
       "bch",
+      "tBCH",
       "cashscript",
       "testnet",
       "faucet"

@@ -9,16 +9,16 @@ class SayHello extends Command {
 
   nonce = Option.String('--nonce', {required: false});
 
-
+  isTestnet = Option.Boolean('--testnet',false )
   
   address = Option.String('--address', {required: false});
 
   async execute() {
     let nonceInt = !this.nonce ? 1: parseInt(this.nonce) ;
     if(this.address){
-       await drip(this.address, nonceInt)
+       await drip(this.isTestnet, this.address, nonceInt)
     }else{
-        await getContract(nonceInt)
+        await getContract(this.isTestnet, nonceInt)
     }
   }
 }
