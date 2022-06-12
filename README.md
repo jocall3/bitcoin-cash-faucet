@@ -1,6 +1,6 @@
 # bitcoin-cash-faucet
 
-A simple on-chain bitcoin cash testnet faucet.
+A simple on-chain bitcoin cash faucet.
 
 This tool uses a [bitcoin script contract written with CashScript](./faucet.cash), which uses introspection to return the whole value of a contract back to itself in the first output, minus some available payout. 
 
@@ -15,7 +15,7 @@ Install the package in your prefereed node environment
 
     npm i bitcoin-cash-faucet # -g
     
-To see the faucet balance:
+To see the default faucet balance on testnet4:
 
     npx bitcoin-cash-faucet --testnet
 
@@ -26,6 +26,18 @@ which returns:
     contract balance:      10797
 
 The above indicates the contract number, deposit address and a balance of 10797 sats. 
+
+
+For mainnet:
+
+    npx bitcoin-cash-faucet 
+
+Which returns:
+
+    # contract index     # 1
+    contract address:      bitcoincash:pq75zmtt8d84nqnxv8vx3wj06mmzlhjnwuwprm4szr
+    contract balance:      7576373
+
 
 ### Getting a payout of testnet coins
 
