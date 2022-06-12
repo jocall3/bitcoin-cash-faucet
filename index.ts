@@ -2,26 +2,18 @@
 
 import { Contract, ElectrumNetworkProvider } from 'cashscript';
 import { compileString } from "cashc";
-import path from 'path';
-
 import { TransactionDetails } from 'cashscript/dist/module/interfaces';
 
 import { faucetContract } from "./faucet.ts"
 
-// blocks between payouts
-let period = 1;
 
-// the faucet payout
-let payout = 1000;
-
-
-export async function getContract(isTestnet:boolean, index:number): Promise<Contract> {
+export async function getContract(isTestnet:boolean, period: number, payout:number, index:number): Promise<Contract> {
   
 
-  // Compile the TransferWithTimeout contract
+  // Compile the Faucet contract
   let script = compileString(faucetContract)
 
-  // Initialise a network provider for network operations on Testnet
+  // Initialise a network provider for network operations
 
   const provider = isTestnet ? new ElectrumNetworkProvider('staging') : new ElectrumNetworkProvider('mainnet');
 
@@ -34,9 +26,9 @@ export async function getContract(isTestnet:boolean, index:number): Promise<Cont
 
 }
 
-export async function drip(isTestnet:boolean, address:string, index:number, feeOverride?:number): Promise<TransactionDetails> {
+export async function drip(isTestnet:boolean, address:string, period: number, payout: number, index:number, feeOverride?:number): Promise<TransactionDetails> {
 
-  let contract = await getContract(isTestnet, index);
+  let contract = await getContract(isTestnet, period, payout, index);
   let balance = await contract.getBalance();
   let fn = contract.functions['drip'];
   

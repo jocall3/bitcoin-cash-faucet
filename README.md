@@ -11,10 +11,23 @@ It is a contract anyone can spend to send a set amount of coins to an address fo
 
 ## Usage
 
-Install the package in your prefereed node environment
+Install the package in your *preferred* node environment, e.g.:
 
     npm i bitcoin-cash-faucet # -g
     
+Help may be shown with the `-h` flag
+
+    $ bitcoin-cash-faucet [--testnet]
+
+    ━━━ Options ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+    --address #0    recieving address to send coins to
+    --fee #0        a custom fee, if mutliple inputs
+    --period #0     how often (in blocks) the contract can pay
+    --payout #0     how much the contract pays (satoshi)
+    --index #0      a nonce to force uniqueness with identical parameters
+
+
 To see the default faucet balance on testnet4:
 
     npx bitcoin-cash-faucet --testnet

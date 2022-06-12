@@ -23,7 +23,7 @@ contract Faucet(
         // use the index
         require(index >= 0);
 
-        // require the second output to match the active bytecode
+        // require the first output to match the active bytecode
         require(tx.outputs[0].lockingBytecode == new LockingBytecodeP2SH(hash160(this.activeBytecode)));
 
         // Get the total value on the contract
