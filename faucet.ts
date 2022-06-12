@@ -13,15 +13,15 @@ contract Faucet(
     int payout,
 
     // random number input into contract to have more than one
-    int nonce
+    int index
 ) {
     function drip() {
 
         // Check that time has passed and that time locks are enabled
         require(tx.age >= period);
             
-        // use the nonce
-        require(nonce >= 0);
+        // use the index
+        require(index >= 0);
 
         // require the second output to match the active bytecode
         require(tx.outputs[0].lockingBytecode == new LockingBytecodeP2SH(hash160(this.activeBytecode)));

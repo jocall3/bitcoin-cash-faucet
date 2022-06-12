@@ -21,7 +21,7 @@ To see the faucet balance:
 
 which returns:
 
-    # contract nonce     # 1
+    # contract index     # 1
     contract address:      bchtest:pq75zmtt8d84nqnxv8vx3wj06mmzlhjnwu2n8uh89l
     contract balance:      10797
 
@@ -36,7 +36,7 @@ To use the faucet, drop your address with the `--address` flag:
 
 which returns: 
 
-    # contract nonce     # 1
+    # contract index     # 1
     contract address:      bchtest:pq75zmtt8d84nqnxv8vx3wj06mmzlhjnwu2n8uh89l
     contract balance:      4002
     payout:              - 848
@@ -54,7 +54,7 @@ Let's get more coins by hitting the faucet again:
 
 It throws an error indicating the transaction was rejected by [BIP68 (timelock) rules](https://en.bitcoin.it/wiki/BIP_0068), 
 
-    # contract nonce     # 1
+    # contract index     # 1
     contract address:      bchtest:pq75zmtt8d84nqnxv8vx3wj06mmzlhjnwu2n8uh89l
     contract balance:      2002
     payout:              - 848
@@ -71,20 +71,20 @@ It throws an error indicating the transaction was rejected by [BIP68 (timelock) 
 
 ## More faucets
 
-The contract includes a nonce, or parameter to make the contract unique.  If the first faucet is busy (already used that block), it should be possible to fire up another contract and fund it by changing this parameter:
+The contract includes a index, or parameter to make the contract unique.  If the first faucet is busy (already used that block), it should be possible to fire up another contract and fund it by changing this parameter:
 
-    npx bitcoin-cash-faucet --testnet --nonce 2
-    # contract nonce     # 2
+    npx bitcoin-cash-faucet --testnet --index 2
+    # contract index     # 2
     contract address:      bchtest:pzvv2yhpsq2twj3kxgmsd76de4y785d3evmwavdl69
     contract balance:      0
 
-    npx bitcoin-cash-faucet --testnet --nonce 3
-    # contract nonce     # 3
+    npx bitcoin-cash-faucet --testnet --index 3
+    # contract index     # 3
     contract address:      bchtest:pzpzxvw8kluds32v3lpa9mq43l2rdpny656agju0lt
     contract balance:      0
 
-    npx bitcoin-cash-faucet --testnet --nonce 1231232134
-    # contract nonce     # 1231232134
+    npx bitcoin-cash-faucet --testnet --index 1231232134
+    # contract index     # 1231232134
     contract address:      bchtest:prgdau8978p7sg5prxy2ggsdcj859wzzayg7nf2e20
     contract balance:      0
 

@@ -7,18 +7,20 @@ import {drip, getContract} from "./index.ts";
 class SayHello extends Command {
   static paths = [Command.Default];
 
-  nonce = Option.String('--nonce', {required: false});
+  index = Option.String('--index', {required: false, description: "recieving address to send coins to"});
 
   isTestnet = Option.Boolean('--testnet',false )
   
-  address = Option.String('--address', {required: false});
+  address = Option.String('--address', {required: false, description: "recieving address to send coins to"});
+  fee = Option.String('--fee', {required: false});
 
   async execute() {
-    let nonceInt = !this.nonce ? 1: parseInt(this.nonce) ;
+    let indexInt = !this.index ? 1: parseInt(this.index) ;
+    let feeOverride = !this.fee ? undefined : parseInt(this.fee) ;
     if(this.address){
-       await drip(this.isTestnet, this.address, nonceInt)
+       await drip(this.isTestnet, this.address, indexInt, feeOverride)
     }else{
-        await getContract(this.isTestnet, nonceInt)
+        await getContract(this.isTestnet, indexInt)
     }
   }
 }

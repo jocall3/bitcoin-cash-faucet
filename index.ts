@@ -15,7 +15,7 @@ let period = 1;
 let payout = 1000;
 
 
-export async function getContract(isTestnet:boolean, nonce:number): Promise<Contract> {
+export async function getContract(isTestnet:boolean, index:number): Promise<Contract> {
   
 
   // Compile the TransferWithTimeout contract
@@ -25,24 +25,25 @@ export async function getContract(isTestnet:boolean, nonce:number): Promise<Cont
 
   const provider = isTestnet ? new ElectrumNetworkProvider('staging') : new ElectrumNetworkProvider('mainnet');
 
-  let contract =  new Contract(script, [period, payout, nonce], provider);
+  let contract =  new Contract(script, [period, payout, index], provider);
 
-  console.log('# contract nonce     #', nonce);
+  console.log('# contract index     #', index);
   console.log('contract address:     ', contract.address);
   console.log('contract balance:     ', await contract.getBalance());
   return contract
 
 }
 
-export async function drip(isTestnet:boolean, address:string, nonce:number): Promise<TransactionDetails> {
+export async function drip(isTestnet:boolean, address:string, index:number, feeOverride?:number): Promise<TransactionDetails> {
 
-  let contract = await getContract(isTestnet, nonce);
+  let contract = await getContract(isTestnet, index);
   let balance = await contract.getBalance();
   let fn = contract.functions['drip'];
   
   let newPrincipal = balance - payout
 
-  let minerFee = 152;
+  let minerFee = feeOverride ? feeOverride : 152;
+  
   let sendAmout = payout - minerFee
   console.log("payout:              -", sendAmout )
   console.log("fee paid:            -", minerFee )
