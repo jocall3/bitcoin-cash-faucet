@@ -1,5 +1,7 @@
 # bitcoin-cash-faucet
 
+**DEPRECATED** **This functionality may now be accessed using the `unspent` npm [command](https://www.npmjs.com/package/unspent) and specifying a version 0 faucet.**
+
 A simple on-chain bitcoin cash faucet.
 
 This tool uses a [bitcoin script contract written with CashScript](./faucet.cash), which uses introspection to return the whole value of a contract back to itself in the first output, minus some available payout. 
