@@ -12,6 +12,7 @@
     "@swc/core": "latest",
     "@swc/helpers": "latest",
     "@tsconfig/node16-strictest-esm": "latest",
+    "bitcoin-cash-faucet": "^1.0.9",
     "cashc": "^0.7.1",
     "cashscript": "^0.7.1",
     "clipanion": "^3.2.0-rc.11",
@@ -23,12 +24,12 @@
     "drip": "ts-node index.ts drip"
   },
   "keywords": [
-      "bitcoin",
-      "bitcoin cash",
-      "bch",
-      "tBCH",
-      "cashscript",
-      "testnet",
-      "faucet"
+    "bitcoin",
+    "bitcoin cash",
+    "bch",
+    "tBCH",
+    "cashscript",
+    "testnet",
+    "faucet"
   ]
 }
